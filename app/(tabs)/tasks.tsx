@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { Text, View } from "../../components/Themed";
+import { View } from "../../components/Themed";
 import NewTodo from "../../components/todo/NewTodo";
 import { useAtom, useSetAtom } from "jotai";
 import {
@@ -10,6 +10,7 @@ import {
   uncompletedTodos,
 } from "../../store/todo";
 import TodoItem from "../../components/todo/TodoItem";
+import { MonoText } from "../../components/StyledText";
 
 export default function TasksScreen() {
   const [todos] = useAtom(uncompletedTodos);
@@ -22,11 +23,11 @@ export default function TasksScreen() {
   return (
     <View style={styles.container}>
       <NewTodo />
-      <Text style={styles.title}>My tasks</Text>
+      <MonoText style={styles.title}>My tasks</MonoText>
       {todos.map((todo, i) => (
         <TodoItem atom={todo} remove={remove} key={i} />
       ))}
-      <Text style={styles.title}>Completed</Text>
+      <MonoText style={styles.title}>Completed</MonoText>
       {completed.map((todo, i) => (
         <TodoItem atom={todo} remove={remove} key={i} />
       ))}

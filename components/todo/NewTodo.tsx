@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { atom, useSetAtom } from "jotai";
 import { Todo, todosAtom } from "../../store/todo";
 
-import { View, TextInput, Button, StyleSheet, Text } from "react-native";
+import { View, TextInput, Button, StyleSheet } from "react-native";
+import { MonoText } from "../StyledText";
 
 export default function NewTodo() {
   const setTodos = useSetAtom(todosAtom);
@@ -38,7 +39,7 @@ export default function NewTodo() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>New todo</Text>
+      <MonoText style={styles.title}>New todo</MonoText>
       <TextInput
         style={styles.input}
         placeholder="Title"
