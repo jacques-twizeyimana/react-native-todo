@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import type { RemoveFn, Todo } from "../../store/todo";
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
@@ -24,23 +24,31 @@ export default function TodoItem({ atom, remove }: TodoItemProps) {
       <Text style={styles.description}>{item.description}</Text>
       <View style={styles.actions}>
         <TouchableOpacity onPress={() => remove(atom)} style={styles.action}>
-          <FontAwesome name="trash" size={24} color={"red"} />
+          <FontAwesome name="trash" size={20} color={"red"} />
           <Text>Delete</Text>
-        </TouchableOpacity>{" "}
-        <TouchableOpacity onPress={toggleArchived} style={styles.action}>
-          <FontAwesome name="archive" size={24} />
-          <Text>Archive</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={toggleCompleted} style={styles.action}>
-          <FontAwesome
-            name={item.completed ? "check-square-o" : "square-o"}
-            size={24}
-            color={"green"}
-          />
-          <Text>
-            {item.completed ? "Mark as uncompleted" : "Mark as completed"}
-          </Text>
-        </TouchableOpacity>
+        {item.archived ? (
+          <TouchableOpacity onPress={toggleArchived} style={styles.action}>
+            <FontAwesome name="recycle" size={20} color={"#066613"} />
+            <Text style={styles.greenText}>Restore</Text>
+          </TouchableOpacity>
+        ) : (
+          <Fragment>
+            <TouchableOpacity onPress={toggleArchived} style={styles.action}>
+              <FontAwesome name="archive" size={20} color={"#ccc"} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={toggleCompleted} style={styles.action}>
+              <FontAwesome
+                name={item.completed ? "check-square-o" : "square-o"}
+                size={20}
+                color={"#066613"}
+              />
+              <Text>
+                {item.completed ? "Mark as uncompleted" : "Mark as completed"}
+              </Text>
+            </TouchableOpacity>
+          </Fragment>
+        )}
       </View>
     </View>
   );
@@ -75,5 +83,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+  },
+  greenText: {
+    color: "#066613",
   },
 });
