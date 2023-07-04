@@ -4,10 +4,11 @@ import type { PrimitiveAtom } from "jotai";
 export type Todo = {
   title: string;
   description: string;
-  deadline?: Date;
   completed: boolean;
   archived?: boolean;
 };
+
+export type RemoveFn = (atom: PrimitiveAtom<Todo>) => void;
 
 export const todosAtom = atom<PrimitiveAtom<Todo>[]>([]);
 
