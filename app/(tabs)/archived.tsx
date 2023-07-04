@@ -4,6 +4,7 @@ import { Text, View } from "../../components/Themed";
 import { useAtom, useSetAtom } from "jotai";
 import { RemoveFn, archivedTodos, todosAtom } from "../../store/todo";
 import TodoItem from "../../components/todo/TodoItem";
+import NoTodosCard from "../../components/todo/NoData";
 
 export default function Archived() {
   const [todos] = useAtom(archivedTodos);
@@ -15,9 +16,14 @@ export default function Archived() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Archived tasks</Text>
-      {todos.map((todo, i) => (
-        <TodoItem atom={todo} remove={remove} key={i} />
-      ))}
+      {todos.length === 0 ? (
+        <NoTodosCard
+          title="No archived tasks"
+          message="No archived tasks available. You can archive a task by tapping the archive icon on the right side of the task."
+        />
+      ) : (
+        todos.map((todo, i) => <TodoItem atom={todo} remove={remove} key={i} />)
+      )}
     </View>
   );
 }

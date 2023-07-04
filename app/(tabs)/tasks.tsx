@@ -11,6 +11,7 @@ import {
 } from "../../store/todo";
 import TodoItem from "../../components/todo/TodoItem";
 import { MonoText } from "../../components/StyledText";
+import NoTodosCard from "../../components/todo/NoData";
 
 export default function TasksScreen() {
   const [todos] = useAtom(uncompletedTodos);
@@ -23,14 +24,31 @@ export default function TasksScreen() {
   return (
     <View style={styles.container}>
       <NewTodo />
+      {/* uncompleted tasks */}
+
       <MonoText style={styles.title}>My tasks</MonoText>
-      {todos.map((todo, i) => (
-        <TodoItem atom={todo} remove={remove} key={i} />
-      ))}
+      {todos.length === 0 ? (
+        <NoTodosCard
+          title="No tasks"
+          message="No tasks available. You can create a task by filling the new todo form above."
+        />
+      ) : (
+        todos.map((todo, i) => <TodoItem atom={todo} remove={remove} key={i} />)
+      )}
+
+      {/* completed tasks */}
+
       <MonoText style={styles.title}>Completed</MonoText>
-      {completed.map((todo, i) => (
-        <TodoItem atom={todo} remove={remove} key={i} />
-      ))}
+      {completed.length === 0 ? (
+        <NoTodosCard
+          title="Completed tasks will appear here"
+          message="When you mark a task as complete a task, it will appear here."
+        />
+      ) : (
+        completed.map((todo, i) => (
+          <TodoItem atom={todo} remove={remove} key={i} />
+        ))
+      )}
     </View>
   );
 }
