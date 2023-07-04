@@ -28,6 +28,10 @@ export default function NewTodo() {
   };
 
   const handleSubmit = () => {
+    // validate form data
+    if (!formData.title || !formData.description)
+      return alert("Title and description are required");
+
     setTodos((prev) => [...prev, atom<Todo>(formData)]);
     resetFormFields();
   };
@@ -57,11 +61,12 @@ export default function NewTodo() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 30,
-    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 15,
   },
   title: {
     fontSize: 18,
+    paddingBottom: 4,
     fontWeight: "bold",
   },
   input: {
@@ -75,5 +80,6 @@ const styles = StyleSheet.create({
   },
   decription: {
     height: 80,
+    marginBottom: 8,
   },
 });

@@ -21,6 +21,7 @@ export default function TasksScreen() {
 
   return (
     <View style={styles.container}>
+      <NewTodo />
       <Text style={styles.title}>My tasks</Text>
       {todos.map((todo, i) => (
         <TodoItem atom={todo} remove={remove} key={i} />
@@ -29,8 +30,6 @@ export default function TasksScreen() {
       {completed.map((todo, i) => (
         <TodoItem atom={todo} remove={remove} key={i} />
       ))}
-
-      <NewTodo />
     </View>
   );
 }
